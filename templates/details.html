@@ -6,9 +6,11 @@
       <div class="mx-auto mb-5" >
         <div class="card mb-3 mt-5">
         <div class="row mx-auto">
-            
+            {% if person.image %}
             <img class="card-img-top cus" src="{{person.image.url}}" height="300px" width="400px" alt="Card image cap">
-            
+            {% else %}
+            <img class="card-img-top cus" src="{% static '1.png' %}" height="300px" width="400px" alt="Card image cap">
+            {% endif %}
             <div class="card-body text-center">
                 <h3 class="card-title"> Name : {{person.name}}</h3>
                 <h5 class="card-text"> Father Name : <small class="text-muted">{{person.father_name}}</small></h5>
