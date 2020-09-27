@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container" >
+      <div class="mx-auto mb-5" >
+        <div class="text-center mt-5" >
+              <h3> Search The person info </h3>
+              <form method="get" id="personForm" data-cities-url="{% url 'dependent:ajax_load_division' %}" data-district-url="{% url 'dependent:ajax_load_district' %}" data-subdistrict-url="{% url 'dependent:ajax_load_subdistrict' %}">
+                <div class="row" >
+                    <div class="col-md-3 col-lg-3" >
+                        
+                        {{ form.country|as_crispy_field }}         
+                    </div>
+                    <div class="col-md-3 col-lg-3" >             
+                                 
+                        {{ form.division|as_crispy_field }}          
+                    </div>
+                    <div class="col-md-3 col-lg-3" >              
+                       
+                        {{ form.district|as_crispy_field }} 
+                    </div>
+                    <div class="col-md-3 col-lg-3" >
+                        
+                        {{ form.subdistrict|as_crispy_field }} 
+                    </div>
+                </div>
+                <input class="mt-4 mb-4 btn-primary btn-lg btncustom" type="submit" value="Submit">
+              </form>
+              <hr>
+        </div>
+        <div class="row">
+          <div class="card-deck">
+            {% for p in person %}
+              <div class="col-lg-4">
+                <div class="card mb-3">
+                  <img class="card-img-top" src="{{p.image.url}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">{{p.name}}</h5>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">{{p.nid}}</small>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_country").change(function () {
+        const url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+        const countryId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'country_id': countryId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_division").html(data);  // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+    });
+</script>
+<script>
+    $("#id_division").change(function () {
+        const url = $("#personForm").attr("data-district-url");  // get the url of the `load_cities` view
+        const divisionId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'division_id': divisionId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_district").html(data);  // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+    });
+</script>
+
+<script>
+    $("#id_district").change(function () {
+        const url = $("#personForm").attr("data-subdistrict-url");  // get the url of the `load_cities` view
+        const districtId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'district_id': districtId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_subdistrict").html(data);  // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+    });
+</script>
+{% endblock content %}

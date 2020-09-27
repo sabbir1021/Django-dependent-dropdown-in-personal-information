@@ -1,0 +1,40 @@
+
+#id_country, #id_division , #id_district, #id_subdistrict ,#id_name , #id_nid,#id_father_name,#id_mother_name,#id_religion {
+    
+    background: #ffffff none repeat scroll 0 0;
+    color: #555555;
+    height: 60px;
+    padding: 16px 20px 16px 40px;
+    position: relative;
+    text-align: left;
+    width: 250px;
+    -webkit-appearance: none;
+  
+}
+#id_image{
+    height: 60px;
+    padding: 16px 20px 16px 40px;
+    width: 250px;
+    text-align: left;
+    position: relative;
+    color: #555555;
+    background: #ffffff none repeat scroll 0 0;
+}
+
+#id_married_status{
+    margin-top: 15px;
+    height: 40px;
+    padding: 16px 20px 16px 40px;
+    width: 350px;
+    text-align: left;
+    position: relative;
+    color: #555555;
+    background: #ffffff none repeat scroll 0 0;
+}
+.btncustom {
+    padding: 5px 50px 5px 50px;
+}
+
+#error_1_id_country,#error_1_id_division,#error_1_id_district,#error_1_id_subdistrict strong{
+    display: none;
+}
