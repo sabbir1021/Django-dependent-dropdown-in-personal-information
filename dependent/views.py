@@ -1,7 +1,8 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , get_object_or_404
 from django.views import View, generic
 from .models import Person , SubDistrict , District , Division , Country
-from .forms import PersonCreationForm , PersonFilterForm
+from .forms import PersonCreationForm , PersonFilterForm , PersonupdateForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     person = Person.objects.all()
@@ -15,6 +16,20 @@ def index(request):
         return render(request , "index.html" , {'form':form,'person':person} )
     return render(request , "index.html" , {'form':form,'person':person} )
 
+def details(request,id):
+    person = get_object_or_404(Person, id=id)
+    return render(request , "details.html" , {'person':person} )
+@login_required
+def person_update_view(request, pk):
+    person = get_object_or_404(Person, pk=pk)
+    form = PersonupdateForm(instance=person)
+    if request.method == 'POST':
+        form = PersonupdateForm(request.POST,request.FILES or None, instance=person)
+        if form.is_valid():
+            form.save()
+            return redirect('dependent:details', id=pk)
+    return render(request, 'create.html', {'form': form})
+@login_required
 def create(request):
     form = PersonCreationForm()
     if request.method == 'POST':

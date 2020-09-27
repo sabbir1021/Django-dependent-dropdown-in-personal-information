@@ -86,4 +86,8 @@ class PersonFilterForm(forms.ModelForm):
             elif self.instance.pk:
                 self.fields['subdistrict'].queryset = self.instance.country.subdistrict_set.order_by('name')
 
-    
+
+class PersonupdateForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container" >
+      <div class="mx-auto mb-5" >
+        <div class="card mb-3 mt-5">
+        <div class="row mx-auto">
+            
+            <img class="card-img-top cus" src="{{person.image.url}}" height="300px" width="400px" alt="Card image cap">
+            
+            <div class="card-body text-center">
+                <h3 class="card-title"> Name : {{person.name}}</h3>
+                <h5 class="card-text"> Father Name : <small class="text-muted">{{person.father_name}}</small></h5>
+                <h5 class="card-text"> Mother Name : <small class="text-muted">{{person.mother_name}}</small></h5>
+                <h5 class="card-text">  Religion : <small class="text-muted">{{person.religion}}</small></h5>
+                <h5 class="card-text">  Married Status : <small class="text-muted">{{person.married_status}}</small></h5>
+                <h5 class="card-text"><small class="text-muted">NID NO : {{person.nid}}</small></h5>
+                <br>
+                <a class="btn btn-primary" href="{% url 'dependent:person_change' pk=person.id %}">Edit</a>
+            </div>
+            <div class="card-body text-center">
+                
+                <h5 class="card-text"> Country : <small class="text-muted">{{person.country}}</small></h5>
+                <h5 class="card-text">  Division : <small class="text-muted">{{person.division}}</small></h5>
+                <h5 class="card-text">  District : <small class="text-muted">{{person.district}}</small></h5>
+                <h5 class="card-text">  Sub-District : <small class="text-muted">{{person.subdistrict}}</small></h5>
+            </div>
+            
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock content %}

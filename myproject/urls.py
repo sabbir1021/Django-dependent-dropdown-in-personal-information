@@ -5,7 +5,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("dependent.urls", namespace="dependent"))
+    path('', include("dependent.urls", namespace="dependent")),
+    path('', include("authenticate.urls", namespace="authenticate"))
 ]
 
 

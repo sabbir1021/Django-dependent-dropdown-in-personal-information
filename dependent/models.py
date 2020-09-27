@@ -34,7 +34,7 @@ class Person(models.Model):
 	mother_name = models.CharField(max_length=40)
 	nid = models.CharField(max_length=40)
 	religion = models.CharField(max_length=50)
-	image = models.FileField(upload_to="person image")
+	image = models.FileField(upload_to="person image" , blank=True)
 	married_status = models.BooleanField(default=False)
 
 	subdistrict = models.ForeignKey(SubDistrict, on_delete=models.CASCADE)

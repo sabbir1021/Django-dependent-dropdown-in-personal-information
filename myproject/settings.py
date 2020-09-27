@@ -21,13 +21,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'authenticate',
+    'dependent',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dependent',
     'crispy_forms'
 ]
 
@@ -126,4 +127,20 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
+LOGIN_REDIRECT_URL = 'dependent:home'
+LOGOUT_REDIRECT_URL = 'dependent:home'
+LOGIN_URL = 'authenticate:login'
+LOGOUT_URL = 'authenticate:logout'
+
+
+
+#DataFlair
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sabbirahmedfarhan45@gmail.com'
+EMAIL_HOST_PASSWORD = 'aoeccwbhymlnaiac'
 

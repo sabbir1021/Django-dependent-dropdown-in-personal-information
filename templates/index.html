@@ -10,19 +10,15 @@
               <form method="get" id="personForm" data-cities-url="{% url 'dependent:ajax_load_division' %}" data-district-url="{% url 'dependent:ajax_load_district' %}" data-subdistrict-url="{% url 'dependent:ajax_load_subdistrict' %}">
                 <div class="row" >
                     <div class="col-md-3 col-lg-3" >
-                        
                         {{ form.country|as_crispy_field }}         
                     </div>
-                    <div class="col-md-3 col-lg-3" >             
-                                 
+                    <div class="col-md-3 col-lg-3" >                  
                         {{ form.division|as_crispy_field }}          
                     </div>
                     <div class="col-md-3 col-lg-3" >              
-                       
                         {{ form.district|as_crispy_field }} 
                     </div>
                     <div class="col-md-3 col-lg-3" >
-                        
                         {{ form.subdistrict|as_crispy_field }} 
                     </div>
                 </div>
@@ -32,26 +28,34 @@
         </div>
         <div class="row">
           <div class="card-deck">
+
             {% for p in person %}
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <div class="card mb-3">
-                  <img class="card-img-top" src="{{p.image.url}}" alt="Card image cap">
+                  {% if p.image %}
+                  <img class="card-img-top" src="{{p.image.url}}" height="200px" alt="Card image cap">
+                  {% else %}
+                  <img class="card-img-top" src="{% static '1.png' %}" height="200px" alt="Card image cap">
+                  {% endif %}
                   <div class="card-body">
-                    <h5 class="card-title">{{p.name}}</h5>
+                    <h6 class="card-title"> Name : {{p.name}}</h6>
+                    {% comment %} <p>Father Name : {{p.father_name}}</p> {% endcomment %}
+                    <a href="{% url 'dependent:details' id=p.id %}">Details</a>
                   </div>
                   <div class="card-footer">
-                    <small class="text-muted">{{p.nid}}</small>
+                    <small class="text-muted">NID No : {{p.nid}}</small> 
                   </div>
                 </div>
               </div>
             {% endfor %}
+
           </div>
         </div>
       </div>
     </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static '3.3.1main.js' %}"></script>
 <script>
     $("#id_country").change(function () {
         const url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
